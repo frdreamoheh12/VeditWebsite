@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Vedit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .layout{ display:grid; grid-template-columns:240px 1fr; min-height:100vh; }
+  @media (max-width:900px){ .layout{ grid-template-columns:1fr; } .sidebar{ display:none; } .sidebar.open{ display:block; } }
+  .sidebar{ border-right:1px solid var(--line); background:var(--deep); }
+  .navitem{ display:flex; align-items:center; gap:.6rem; padding:.7rem .9rem; border-radius:10px; font-size:.88rem; color:var(--muted); cursor:pointer; transition:.15s; }
+  .navitem:hover{ background:var(--glass); color:#fff; }
+  .navitem.active{ background:linear-gradient(135deg, rgba(124,58,237,.25), rgba(232,121,249,.15)); color:#fff; border:1px solid var(--line); }
+  table{ width:100%; border-collapse:collapse; font-size:.85rem; }
+  th{ text-align:left; color:var(--muted); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; padding:.7rem; border-bottom:1px solid var(--line); }
+  td{ padding:.8rem .7rem; border-bottom:1px solid rgba(255,255,255,.04); vertical-align:top; }
+  tr:hover td{ background:rgba(255,255,255,.02); }
+  .tab-panel{ display:none; } .tab-panel.active{ display:block; }
+  .icon-btn{ padding:.4rem .6rem; border-radius:8px; border:1px solid var(--line); font-size:.72rem; cursor:pointer; background:var(--glass); transition:.15s; }
+  .icon-btn:hover{ border-color:var(--bright); }
+</style>
+</head>
+<body>
+
+<div id="guard" class="hidden fixed inset-0 z-[999] flex items-center justify-center bg-[--void]">
+  <p class="text-[--muted]">Redirecting to login…</p>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar p-6 flex flex-col justify-between">
+    <div>
+      <a href="index.html" class="flex items-center gap-2 mb-8"><img src="logo-icon.png" alt="Vedit" class="h-7 w-7 object-contain"><span class="display text-xl font-bold">Ved<span class="gradient-text">it</span></span></a>
+      <p class="text-xs text-[--muted-2] uppercase tracking-wide mb-3">Applications</p>
+      <div class="space-y-1 mb-6">
+        <div class="navitem active" data-tab="serviceRequests"><span>&#128190;</span> Service Requests</div>
+        <div class="navitem" data-tab="classApplications"><span>&#127891;</span> Class Applications</div>
+        <div class="navitem" data-tab="teamApplications"><span>&#129309;</span> Team Applications</div>
+      </div>
+      <p class="text-xs text-[--muted-2] uppercase tracking-wide mb-3">Content</p>
+      <div class="space-y-1">
+        <div class="navitem" data-tab="manageServices"><span>&#9881;&#65039;</span> Services & Pricing</div>
+        <div class="navitem" data-tab="manageCourses"><span>&#128218;</span> Courses & Pricing</div>
+        <div class="navitem" data-tab="manageTestimonials"><span>&#128172;</span> Testimonials</div>
+        <div class="navitem" data-tab="managePortfolio"><span>&#127916;</span> Portfolio</div>
+      </div>
+    </div>
+    <div class="glass p-4">
+      <p id="adminName" class="font-semibold text-sm">—</p>
+      <p id="adminRole" class="text-xs text-[--muted] mb-3">—</p>
+      <button id="logoutBtn" class="btn btn-ghost btn-sm w-full">Log Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="p-6 md:p-10">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <button id="mobileSidebarToggle" class="md:hidden icon-btn mb-3">&#9776; Menu</button>
+        <h1 id="pageTitle" class="display text-2xl md:text-3xl font-bold">Service Requests</h1>
+        <p id="pageSubtitle" class="text-sm text-[--muted] mt-1">All incoming editing service requests.</p>
+      </div>
+    </div>
+
+    <!-- ===== SERVICE REQUESTS ===== -->
+    <section class="tab-panel active" id="panel-serviceRequests">
+      <div class="card">
+        <div class="flex flex-wrap gap-3 mb-5 items-center">
+          <input id="sr-search" class="field max-w-xs" placeholder="Search name, email, ID...">
+          <select id="sr-filter" class="field max-w-[180px]">
+            <option value="">All statuses</option>
+            <option>Pending</option><option>Under Review</option><option>Accepted</option><option>Rejected</option><option>Completed</option>
+          </select>
+          <button id="sr-export" class="btn btn-ghost btn-sm ml-auto">Export CSV</button>
+        </div>
+        <div class="overflow-x-auto"><table id="sr-table"><thead><tr>
+          <th>App ID</th><th>Name</th><th>Contact</th><th>Type</th><th>Deadline</th><th>Budget</th><th>Status</th><th>Actions</th>
+        </tr></thead><tbody></tbody></table></div>
+        <div id="sr-pagination" class="flex justify-center gap-2 mt-6"></div>
+      </div>
+    </section>
+
+    <!-- ===== CLASS APPLICATIONS ===== -->
+    <section class="tab-panel" id="panel-classApplications">
+      <div class="card">
+        <div class="flex flex-wrap gap-3 mb-5 items-center">
+          <input id="ca-search" class="field max-w-xs" placeholder="Search name, email, ID...">
+          <select id="ca-filter" class="field max-w-[180px]">
+            <option value="">All statuses</option>
+            <option>Pending</option><option>Under Review</option><option>Accepted</option><option>Rejected</option><option>Completed</option>
+          </select>
+          <button id="ca-export" class="btn btn-ghost btn-sm ml-auto">Export CSV</button>
+        </div>
+        <div class="overflow-x-auto"><table id="ca-table"><thead><tr>
+          <th>App ID</th><th>Name</th><th>Contact</th><th>Course</th><th>Level</th><th>Status</th><th>Actions</th>
+        </tr></thead><tbody></tbody></table></div>
+        <div id="ca-pagination" class="flex justify-center gap-2 mt-6"></div>
+      </div>
+    </section>
+
+    <!-- ===== TEAM APPLICATIONS ===== -->
+    <section class="tab-panel" id="panel-teamApplications">
+      <div class="card">
+        <div class="flex flex-wrap gap-3 mb-5 items-center">
+          <input id="ta-search" class="field max-w-xs" placeholder="Search name, email, ID...">
+          <select id="ta-filter" class="field max-w-[180px]">
+            <option value="">All statuses</option>
+            <option>Pending</option><option>Under Review</option><option>Accepted</option><option>Rejected</option><option>Completed</option>
+          </select>
+          <button id="ta-export" class="btn btn-ghost btn-sm ml-auto">Export CSV</button>
+        </div>
+        <div class="overflow-x-auto"><table id="ta-table"><thead><tr>
+          <th>App ID</th><th>Name</th><th>Contact</th><th>Specialization</th><th>Status</th><th>Actions</th>
+        </tr></thead><tbody></tbody></table></div>
+        <div id="ta-pagination" class="flex justify-center gap-2 mt-6"></div>
+      </div>
+    </section>
+
+    <!-- ===== MANAGE SERVICES ===== -->
+    <section class="tab-panel" id="panel-manageServices">
+      <div class="card">
+        <div class="flex justify-between items-center mb-5">
+          <p class="text-sm text-[--muted]">Edit pricing and descriptions shown on the homepage.</p>
+          <button id="svc-add" class="btn btn-primary btn-sm">+ Add Service</button>
+        </div>
+        <div id="svc-list" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ===== MANAGE COURSES ===== -->
+    <section class="tab-panel" id="panel-manageCourses">
+      <div class="card">
+        <div class="flex justify-between items-center mb-5">
+          <p class="text-sm text-[--muted]">Edit course pricing, duration and level.</p>
+          <button id="crs-add" class="btn btn-primary btn-sm">+ Add Course</button>
+        </div>
+        <div id="crs-list" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="tab-panel" id="panel-manageTestimonials">
+      <div class="card">
+        <div class="flex justify-between items-center mb-5">
+          <p class="text-sm text-[--muted]">Shown in the homepage testimonials section.</p>
+          <button id="tst-add" class="btn btn-primary btn-sm">+ Add Testimonial</button>
+        </div>
+        <div id="tst-list" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="tab-panel" id="panel-managePortfolio">
+      <div class="card">
+        <div class="flex justify-between items-center mb-5">
+          <p class="text-sm text-[--muted]">Shown in the homepage portfolio section.</p>
+          <button id="pf-add" class="btn btn-primary btn-sm">+ Add Portfolio Item</button>
+        </div>
+        <div id="pf-list" class="space-y-3"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===== Generic modal for edit forms ===== -->
+<div id="modalOverlay" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+  <div id="modalBox" class="card w-full max-w-lg max-h-[85vh] overflow-y-auto"></div>
+</div>
+
+<script src="api.js"></script>
+<script src="main.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

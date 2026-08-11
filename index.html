@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vedit: Video Editors — Professional Editing & Online Classes</title>
+<meta name="description" content="Vedit: Video Editors — professional video & photo editing services, YouTube & Shorts editing, thumbnail design, and online editing classes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><img src="logo-icon.png" alt="Vedit" class="h-8 w-8 object-contain"><span class="display text-xl font-bold">Ved<span class="gradient-text">it</span></span></a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-[--muted]">
+      <a href="index.html#about" class="hover:text-white transition">About</a>
+      <a href="index.html#services" class="hover:text-white transition">Services</a>
+      <a href="index.html#classes" class="hover:text-white transition">Classes</a>
+      <a href="index.html#portfolio" class="hover:text-white transition">Portfolio</a>
+      <a href="index.html#team" class="hover:text-white transition">Team</a>
+      <a href="index.html#faq" class="hover:text-white transition">FAQ</a>
+      <a href="status.html" class="hover:text-white transition">Track Application</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="apply-service.html" class="btn btn-ghost btn-sm">Hire Us</a>
+      <a href="apply-class.html" class="btn btn-primary btn-sm">Apply for Classes</a>
+    </div>
+    <button id="navToggle" class="md:hidden text-2xl">&#9776;</button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden px-6 pb-5 flex flex-col gap-4 text-sm">
+    <a href="index.html#about">About</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#classes">Classes</a>
+    <a href="index.html#portfolio">Portfolio</a>
+    <a href="index.html#team">Team</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="status.html">Track Application</a>
+    <a href="apply-service.html" class="btn btn-ghost btn-sm w-fit">Hire Us</a>
+    <a href="apply-class.html" class="btn btn-primary btn-sm w-fit">Apply for Classes</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative pt-40 pb-24 px-6 overflow-hidden">
+  <div class="max-w-5xl mx-auto text-center relative z-10">
+    <span class="timecode inline-block">00:00 — WELCOME</span>
+    <img src="logo-lockup.png" alt="Vedit: Video Editors" class="mx-auto w-full max-w-md md:max-w-lg mb-2">
+    <h1 class="sr-only">Vedit: Video Editors</h1>
+    <p class="mt-6 text-lg md:text-xl text-[--muted] max-w-2xl mx-auto">
+      Professional video &amp; photo editing services and online editing classes —
+      cut, graded, and delivered by editors who actually ship for YouTube, Shorts &amp; Reels.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a href="apply-service.html" class="btn btn-primary">Hire Us</a>
+      <a href="apply-class.html" class="btn btn-ghost">Apply for Classes</a>
+      <a href="index.html#portfolio" class="btn btn-ghost">View Portfolio</a>
+    </div>
+
+    <div class="waveform mt-16 justify-center opacity-70"></div>
+    <div class="scrubber max-w-2xl mx-auto"></div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR (Fiverr-style credibility strip) ============ -->
+<section class="px-6 -mt-2 mb-4">
+  <div class="max-w-5xl mx-auto glass p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center reveal in">
+    <div>
+      <p class="display text-2xl font-extrabold gradient-text flex items-center justify-center gap-1">4.9 <span class="text-base">★</span></p>
+      <p class="text-xs text-[--muted] mt-1">Avg. Client Rating</p>
+    </div>
+    <div>
+      <p class="display text-2xl font-extrabold gradient-text">500+</p>
+      <p class="text-xs text-[--muted] mt-1">Orders Completed</p>
+    </div>
+    <div>
+      <p class="display text-2xl font-extrabold gradient-text">&lt; 24h</p>
+      <p class="text-xs text-[--muted] mt-1">Avg. Response Time</p>
+    </div>
+    <div>
+      <p class="display text-2xl font-extrabold gradient-text">98%</p>
+      <p class="text-xs text-[--muted] mt-1">On-Time Delivery</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="timecode">00:01 — ABOUT US</span>
+      <h2 class="display text-3xl md:text-4xl font-bold mb-5">We cut footage into stories worth watching</h2>
+      <p class="text-[--muted] leading-relaxed mb-4">
+        Vedit is a small studio of editors and colorists working across YouTube, Shorts, Reels,
+        and brand content. We handle the timeline so you can focus on filming — and if you'd
+        rather learn the craft yourself, our online classes take you from your first cut to a
+        graded, delivery-ready export.
+      </p>
+      <p class="text-[--muted] leading-relaxed">
+        Every project runs through the same pipeline: brief, edit, review, deliver — tracked with
+        a public application ID so you always know where things stand.
+      </p>
+      <div class="grid grid-cols-3 gap-4 mt-8">
+        <div class="glass p-4 text-center"><p class="display text-2xl font-bold gradient-text">500+</p><p class="text-xs text-[--muted] mt-1">Projects Edited</p></div>
+        <div class="glass p-4 text-center"><p class="display text-2xl font-bold gradient-text">120+</p><p class="text-xs text-[--muted] mt-1">Students Taught</p></div>
+        <div class="glass p-4 text-center"><p class="display text-2xl font-bold gradient-text">24h</p><p class="text-xs text-[--muted] mt-1">Avg. Response</p></div>
+      </div>
+    </div>
+    <div class="reveal card">
+      <p class="timecode">THE PIPELINE</p>
+      <div class="space-y-5 mt-2">
+        <div class="flex items-start gap-4"><span class="mono text-[--magenta] text-sm w-16 shrink-0">00:01</span><div><p class="font-semibold">Apply</p><p class="text-sm text-[--muted]">Submit a service or class request with your brief.</p></div></div>
+        <div class="flex items-start gap-4"><span class="mono text-[--magenta] text-sm w-16 shrink-0">00:02</span><div><p class="font-semibold">Review</p><p class="text-sm text-[--muted]">We scope timeline, budget and deadline.</p></div></div>
+        <div class="flex items-start gap-4"><span class="mono text-[--magenta] text-sm w-16 shrink-0">00:03</span><div><p class="font-semibold">Edit</p><p class="text-sm text-[--muted]">Cut, grade, sound design, motion graphics.</p></div></div>
+        <div class="flex items-start gap-4"><span class="mono text-[--magenta] text-sm w-16 shrink-0">00:04</span><div><p class="font-semibold">Deliver</p><p class="text-sm text-[--muted]">Export handed off, status marked Completed.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="scrubber max-w-3xl mx-auto opacity-60"></div>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="section px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <span class="timecode justify-center flex">00:02 — SERVICES</span>
+      <h2 class="display text-3xl md:text-4xl font-bold">What we edit</h2>
+      <p class="text-[--muted] mt-3 max-w-xl mx-auto">Pricing is a starting point — final quotes depend on length, footage volume and turnaround.</p>
+    </div>
+    <div id="servicesGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="card animate-pulse h-56"></div><div class="card animate-pulse h-56"></div>
+      <div class="card animate-pulse h-56"></div><div class="card animate-pulse h-56"></div>
+    </div>
+  </div>
+</section>
+
+<div class="scrubber max-w-3xl mx-auto opacity-60"></div>
+
+<!-- ============ ONLINE CLASSES ============ -->
+<section id="classes" class="section px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <span class="timecode justify-center flex">00:03 — ONLINE CLASSES</span>
+      <h2 class="display text-3xl md:text-4xl font-bold">Learn editing with us</h2>
+      <p class="text-[--muted] mt-3 max-w-xl mx-auto">Live, cohort-based classes in video editing and photo editing — beginner to professional.</p>
+    </div>
+    <div id="coursesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card animate-pulse h-52"></div><div class="card animate-pulse h-52"></div><div class="card animate-pulse h-52"></div>
+    </div>
+    <div class="text-center mt-10">
+      <a href="apply-class.html" class="btn btn-primary">Apply for Classes</a>
+    </div>
+  </div>
+</section>
+
+<div class="scrubber max-w-3xl mx-auto opacity-60"></div>
+
+<!-- ============ PORTFOLIO ============ -->
+<section id="portfolio" class="section px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <span class="timecode justify-center flex">00:04 — PORTFOLIO</span>
+      <h2 class="display text-3xl md:text-4xl font-bold">Recent cuts</h2>
+    </div>
+    <div id="portfolioGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+</section>
+
+<div class="scrubber max-w-3xl mx-auto opacity-60"></div>
+
+<!-- ============ MEET THE EDITORS (seller-style cards) ============ -->
+<section id="team" class="section px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <span class="timecode justify-center flex">00:04.5 — THE TEAM</span>
+      <h2 class="display text-3xl md:text-4xl font-bold">Meet the editors</h2>
+      <p class="text-[--muted] mt-3 max-w-xl mx-auto">Real people behind every order — here's who you're working with.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card reveal in">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg" style="background:linear-gradient(135deg, var(--purple), var(--magenta));">AR</div>
+          <div>
+            <p class="font-bold">Aarav R.</p>
+            <p class="text-xs text-[--muted]">Lead Video Editor</p>
+          </div>
+          <span class="ml-auto badge badge-accepted">Verified</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs mb-3">
+          <span class="text-[--magenta]">★★★★★</span><span class="text-[--muted]">4.9 (210 orders)</span>
+        </div>
+        <p class="text-sm text-[--muted]">YouTube & long-form specialist — pacing, sound design, retention-focused cuts.</p>
+        <p class="text-xs text-[--muted-2] mt-3">Responds in &lt; 2 hours</p>
+      </div>
+      <div class="card reveal in">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg" style="background:linear-gradient(135deg, var(--bright), var(--purple));">SK</div>
+          <div>
+            <p class="font-bold">Simran K.</p>
+            <p class="text-xs text-[--muted]">Motion & Thumbnail Designer</p>
+          </div>
+          <span class="ml-auto badge badge-accepted">Verified</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs mb-3">
+          <span class="text-[--magenta]">★★★★★</span><span class="text-[--muted]">4.8 (156 orders)</span>
+        </div>
+        <p class="text-sm text-[--muted]">High-CTR thumbnails and animated titles, lower-thirds, and motion graphics.</p>
+        <p class="text-xs text-[--muted-2] mt-3">Responds in &lt; 4 hours</p>
+      </div>
+      <div class="card reveal in">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg" style="background:linear-gradient(135deg, var(--magenta), var(--purple-2));">DV</div>
+          <div>
+            <p class="font-bold">Dev V.</p>
+            <p class="text-xs text-[--muted]">Colorist & Shorts Editor</p>
+          </div>
+          <span class="ml-auto badge badge-accepted">Verified</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs mb-3">
+          <span class="text-[--magenta]">★★★★★</span><span class="text-[--muted]">5.0 (134 orders)</span>
+        </div>
+        <p class="text-sm text-[--muted]">Cinematic color grading, fast-paced Shorts & Reels edits, caption sync.</p>
+        <p class="text-xs text-[--muted-2] mt-3">Responds in &lt; 1 hour</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="scrubber max-w-3xl mx-auto opacity-60"></div>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" class="section px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <span class="timecode justify-center flex">00:05 — TESTIMONIALS</span>
+      <h2 class="display text-3xl md:text-4xl font-bold">What clients & students say</h2>
+    </div>
+    <div id="testimonialsGrid" class="grid md:grid-cols-3 gap-6"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="section px-6">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <span class="timecode justify-center flex">00:06 — FAQ</span>
+      <h2 class="display text-3xl md:text-4xl font-bold">Frequently asked</h2>
+    </div>
+    <div class="space-y-3" id="faqList">
+      <details class="glass p-5 group">
+        <summary class="cursor-pointer font-semibold flex justify-between items-center">Turnaround time? <span class="text-[--muted] group-open:rotate-45 transition">+</span></summary>
+        <p class="text-sm text-[--muted] mt-3">Most short-form edits (Shorts/Reels) ship in 24–48 hours. Long-form YouTube videos typically take 3–7 days depending on length and revisions.</p>
+      </details>
+      <details class="glass p-5 group">
+        <summary class="cursor-pointer font-semibold flex justify-between items-center">How do I track my application? <span class="text-[--muted] group-open:rotate-45 transition">+</span></summary>
+        <p class="text-sm text-[--muted] mt-3">Every submission generates an Application ID. Use the <a href="status.html" class="gradient-text underline">Application Status</a> page to check where it stands — no login required.</p>
+      </details>
+      <details class="glass p-5 group">
+        <summary class="cursor-pointer font-semibold flex justify-between items-center">Do classes run live? <span class="text-[--muted] group-open:rotate-45 transition">+</span></summary>
+        <p class="text-sm text-[--muted] mt-3">Yes — small live cohorts over Discord voice/screen-share, plus recordings for every session.</p>
+      </details>
+      <details class="glass p-5 group">
+        <summary class="cursor-pointer font-semibold flex justify-between items-center">What if I don't have editing software? <span class="text-[--muted] group-open:rotate-45 transition">+</span></summary>
+        <p class="text-sm text-[--muted] mt-3">We'll help you pick free or budget software during onboarding — a powerful PC/laptop is recommended but we can advise on minimum specs.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="section px-6">
+  <div class="max-w-5xl mx-auto card grid md:grid-cols-2 gap-10 reveal">
+    <div>
+      <span class="timecode">00:07 — CONTACT</span>
+      <h2 class="display text-3xl font-bold mb-4">Let's start your edit</h2>
+      <p class="text-[--muted] mb-6">Fastest way to reach us is Discord. For a structured request, use the buttons below — you'll get an Application ID to track.</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="apply-service.html" class="btn btn-primary btn-sm">Request a Service</a>
+        <a href="join-team.html" class="btn btn-ghost btn-sm">Join Our Team</a>
+      </div>
+    </div>
+    <div class="space-y-3 text-sm">
+      <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Discord</span><span>discord.gg/vedit</span></div>
+      <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Email</span><span>Veditofficial0@gmail.com</span></div>
+      <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Response time</span><span>&lt; 24 hours</span></div>
+      <div class="flex justify-between"><span class="text-[--muted]">Availability</span><span>Mon–Sat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-[--line] px-6 py-12 mt-10">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+    <div>
+      <div class="flex items-center gap-2"><img src="logo-icon.png" alt="Vedit" class="h-7 w-7 object-contain"><p class="display text-xl font-bold">Ved<span class="gradient-text">it</span></p></div>
+      <p class="text-sm text-[--muted] mt-2 max-w-xs">Professional video & photo editing services and online editing classes.</p>
+    </div>
+    <div class="flex gap-12 text-sm">
+      <div class="space-y-2">
+        <p class="text-[--muted] uppercase text-xs tracking-wide mb-2">Explore</p>
+        <a href="index.html#services" class="block hover:text-white">Services</a>
+        <a href="index.html#classes" class="block hover:text-white">Classes</a>
+        <a href="status.html" class="block hover:text-white">Track Application</a>
+      </div>
+      <div class="space-y-2">
+        <p class="text-[--muted] uppercase text-xs tracking-wide mb-2">Social</p>
+        <a href="#" class="block hover:text-white">YouTube</a>
+        <a href="#" class="block hover:text-white">Instagram</a>
+        <a href="#" class="block hover:text-white">Discord</a>
+      </div>
+      <div class="space-y-2">
+        <p class="text-[--muted] uppercase text-xs tracking-wide mb-2">Admin</p>
+        <a href="login.html" class="block hover:text-white">Admin Login</a>
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-xs text-[--muted-2] mt-10">&copy; 2026 Vedit: Video Editors. All rights reserved.</p>
+</footer>
+
+<script src="api.js"></script>
+<script src="main.js"></script>
+<script>
+async function loadHomeData() {
+  // Services
+  try {
+    const services = await api.get('/services');
+    renderServices(services.length ? services : fallbackServices);
+  } catch (e) { renderServices(fallbackServices); }
+
+  // Courses
+  try {
+    const courses = await api.get('/courses');
+    renderCourses(courses.length ? courses : fallbackCourses);
+  } catch (e) { renderCourses(fallbackCourses); }
+
+  // Testimonials
+  try {
+    const t = await api.get('/testimonials');
+    renderTestimonials(t.length ? t : fallbackTestimonials);
+  } catch (e) { renderTestimonials(fallbackTestimonials); }
+
+  // Portfolio
+  try {
+    const p = await api.get('/portfolio');
+    renderPortfolio(p.length ? p : fallbackPortfolio);
+  } catch (e) { renderPortfolio(fallbackPortfolio); }
+}
+
+const fallbackServices = [
+  { name: 'Video Editing', description: 'Full-length YouTube & brand video edits with pacing, transitions and sound design.', startingPrice: 999 },
+  { name: 'Photo Editing', description: 'Retouching, color correction and composite edits for photographers & brands.', startingPrice: 249 },
+  { name: 'YouTube Editing', description: 'End-to-end long-form editing tuned for retention and watch time.', startingPrice: 1299 },
+  { name: 'Shorts & Reels Editing', description: 'Fast-paced vertical edits with captions, hooks and trending sound sync.', startingPrice: 399 },
+  { name: 'Thumbnail Design', description: 'High-CTR thumbnails designed to match your channel branding.', startingPrice: 199 },
+  { name: 'Motion Graphics', description: 'Custom titles, lower-thirds and animated overlays for your videos.', startingPrice: 699 },
+  { name: 'Color Grading', description: 'Cinematic color grading and correction pass on your existing edit.', startingPrice: 549 },
+];
+const fallbackCourses = [
+  { title: 'Beginner Video Editing', description: 'Learn cuts, transitions and export settings from zero.', duration: '4 weeks', level: 'Beginner', price: 1499 },
+  { title: 'Advanced Video Editing', description: 'Multicam, sound design, and advanced pacing techniques.', duration: '6 weeks', level: 'Advanced', price: 2999 },
+  { title: 'Beginner Photo Editing', description: 'Master the retouching and color-correction basics.', duration: '3 weeks', level: 'Beginner', price: 1199 },
+  { title: 'Professional Photoshop', description: 'Compositing, masking and advanced retouch workflows.', duration: '5 weeks', level: 'Advanced', price: 2499 },
+  { title: 'Thumbnail Design Masterclass', description: 'Design thumbnails that convert clicks into views.', duration: '2 weeks', level: 'Intermediate', price: 999 },
+];
+const fallbackTestimonials = [
+  { name: 'Rhea K.', role: 'YouTuber, 80K subs', quote: 'Vedit turned my raw footage into a retention machine — turnaround was faster than promised.' },
+  { name: 'Dev Malhotra', role: 'Student, Advanced Editing', quote: 'The class pushed me from basic cuts to a portfolio I actually feel proud of.' },
+  { name: 'StudioNine', role: 'Brand client', quote: 'Consistent quality across every batch of Reels — communication was smooth throughout.' },
+];
+const fallbackPortfolio = [
+  { title: 'Travel Vlog Series', category: 'YouTube Editing' },
+  { title: 'Brand Launch Reel', category: 'Shorts & Reels' },
+  { title: 'Podcast Highlight Cuts', category: 'YouTube Editing' },
+];
+
+function renderServices(list) {
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = list.map((s, i) => `
+    <div class="card reveal" style="transition-delay:${i * 60}ms">
+      <p class="timecode">SERVICE</p>
+      <h3 class="font-bold text-lg mb-2">${s.name}</h3>
+      <p class="text-sm text-[--muted] mb-3">${s.description}</p>
+      <div class="flex items-center gap-2 mb-4 text-xs">
+        <span class="text-[--magenta]">★★★★★</span>
+        <span class="text-[--muted]">${s.rating || '4.9'} (${s.orders || Math.floor(40 + i * 17)} orders)</span>
+      </div>
+      <p class="mono text-sm text-[--bright] mb-4">From ₹${s.startingPrice}</p>
+      <a href="apply-service.html?service=${encodeURIComponent(s.name)}" class="btn btn-primary btn-sm w-full">Order Now</a>
+    </div>`).join('');
+  document.querySelectorAll('#servicesGrid .reveal').forEach((el) => el.classList.add('in'));
+}
+function renderCourses(list) {
+  const grid = document.getElementById('coursesGrid');
+  grid.innerHTML = list.map((c, i) => `
+    <div class="card reveal" style="transition-delay:${i * 60}ms">
+      <p class="timecode">COURSE</p>
+      <h3 class="font-bold text-lg mb-2">${c.title}</h3>
+      <p class="text-sm text-[--muted] mb-3">${c.description}</p>
+      <div class="flex items-center gap-2 mb-3 text-xs">
+        <span class="text-[--magenta]">★★★★★</span>
+        <span class="text-[--muted]">${c.rating || '5.0'} (${c.students || Math.floor(12 + i * 6)} students)</span>
+      </div>
+      <div class="flex gap-2 mb-4 text-xs">
+        <span class="badge">${c.duration}</span><span class="badge">${c.level}</span>
+      </div>
+      <p class="mono text-sm text-[--bright] mb-4">₹${c.price}</p>
+      <a href="apply-class.html?course=${encodeURIComponent(c.title)}" class="btn btn-primary btn-sm w-full">Apply</a>
+    </div>`).join('');
+  document.querySelectorAll('#coursesGrid .reveal').forEach((el) => el.classList.add('in'));
+}
+function renderTestimonials(list) {
+  document.getElementById('testimonialsGrid').innerHTML = list.map((t) => `
+    <div class="card reveal in">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-[--magenta] text-sm">★★★★★</span>
+        <span class="badge badge-accepted text-[10px]">Verified Order</span>
+      </div>
+      <p class="text-sm text-[--muted] mb-5">${t.quote}</p>
+      <p class="font-semibold text-sm">${t.name}</p>
+      <p class="text-xs text-[--muted-2]">${t.role}</p>
+    </div>`).join('');
+}
+function renderPortfolio(list) {
+  document.getElementById('portfolioGrid').innerHTML = list.map((p) => `
+    <div class="card reveal in aspect-video flex flex-col justify-end" style="background:linear-gradient(160deg, var(--panel-2), var(--void));">
+      <p class="timecode">${p.category}</p>
+      <p class="font-bold">${p.title}</p>
+    </div>`).join('');
+}
+
+loadHomeData();
+</script>
+</body>
+</html>

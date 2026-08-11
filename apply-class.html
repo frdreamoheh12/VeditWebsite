@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply for Classes — Vedit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><img src="logo-icon.png" alt="Vedit" class="h-8 w-8 object-contain"><span class="display text-xl font-bold">Ved<span class="gradient-text">it</span></span></a>
+    <a href="index.html" class="btn btn-ghost btn-sm">&larr; Back home</a>
+  </div>
+</header>
+
+<main class="max-w-2xl mx-auto px-6 pt-32 pb-24">
+  <span class="timecode">CLASS APPLICATION</span>
+  <h1 class="display text-3xl md:text-4xl font-bold mb-2">Apply for online classes</h1>
+  <p class="text-[--muted] mb-8">Tell us where you're starting from and we'll place you in the right cohort.</p>
+
+  <form id="classForm" class="card space-y-5">
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div><label class="flabel">Full Name *</label><input required name="fullName" class="field"></div>
+      <div><label class="flabel">Age *</label><input required type="number" min="10" max="100" name="age" class="field"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div><label class="flabel">Email *</label><input required type="email" name="email" class="field"></div>
+      <div><label class="flabel">Discord Username *</label><input required name="discordUsername" class="field"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div><label class="flabel">Country *</label><input required name="country" class="field"></div>
+      <div><label class="flabel">Time Zone *</label><input required name="timeZone" class="field" placeholder="e.g. GMT+5:30"></div>
+    </div>
+    <div>
+      <label class="flabel">Phone Number (optional)</label>
+      <input name="phoneNumber" class="field">
+    </div>
+    <div>
+      <label class="flabel">Course *</label>
+      <select required id="courseSelect" name="course" class="field">
+        <option value="">Select one</option>
+        <option>Video Editing</option><option>Photo Editing</option><option>Both</option>
+      </select>
+    </div>
+    <div>
+      <label class="flabel">Current Skill Level *</label>
+      <select required name="skillLevel" class="field">
+        <option value="">Select one</option>
+        <option>Beginner</option><option>Intermediate</option><option>Advanced</option>
+      </select>
+    </div>
+    <div>
+      <label class="flabel">Why do you want to learn editing? *</label>
+      <textarea required name="motivation" rows="3" class="field"></textarea>
+    </div>
+    <div>
+      <label class="flabel">Do you have a PC/Laptop? *</label>
+      <select required name="hasDevice" class="field">
+        <option value="">Select one</option><option>Yes</option><option>No</option>
+      </select>
+    </div>
+    <div>
+      <label class="flabel">Have you edited before? *</label>
+      <select required name="hasEditedBefore" class="field">
+        <option value="">Select one</option><option>Yes</option><option>No</option>
+      </select>
+    </div>
+    <div>
+      <label class="flabel">Portfolio Link (optional)</label>
+      <input name="portfolioLink" class="field" placeholder="https://...">
+    </div>
+    <label class="flex items-start gap-3 text-sm text-[--muted]">
+      <input required type="checkbox" name="agreesToRules" class="mt-1">
+      I agree to the class rules and code of conduct.
+    </label>
+
+    <button type="submit" id="submitBtn" class="btn btn-primary w-full">Submit Application</button>
+    <div id="formResult" class="hidden"></div>
+  </form>
+</main>
+
+<script src="api.js"></script>
+<script src="main.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get('course');
+  if (course) {
+    const map = { 'Beginner Video Editing': 'Video Editing', 'Advanced Video Editing': 'Video Editing',
+      'Beginner Photo Editing': 'Photo Editing', 'Professional Photoshop': 'Photo Editing', 'Thumbnail Design Masterclass': 'Both' };
+    document.getElementById('courseSelect').value = map[course] || '';
+  }
+
+  document.getElementById('classForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const result = document.getElementById('formResult');
+    const fd = new FormData(e.target);
+    const data = Object.fromEntries(fd.entries());
+    data.agreesToRules = fd.get('agreesToRules') === 'on';
+    setButtonLoading(btn, true, 'Submitting...');
+    try {
+      const res = await api.post('/applications/class', data);
+      showFormResult(result, true, `Application submitted! Your Application ID is <span class="mono font-bold">${res.applicationId}</span>. Track it anytime on the <a class="underline" href="status.html">Application Status</a> page.`);
+      e.target.reset();
+    } catch (err) {
+      showFormResult(result, false, err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setButtonLoading(btn, false, 'Submit Application');
+    }
+  });
+</script>
+</body>
+</html>

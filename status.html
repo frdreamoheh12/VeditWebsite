@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Status — Vedit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><img src="logo-icon.png" alt="Vedit" class="h-8 w-8 object-contain"><span class="display text-xl font-bold">Ved<span class="gradient-text">it</span></span></a>
+    <a href="index.html" class="btn btn-ghost btn-sm">&larr; Back home</a>
+  </div>
+</header>
+
+<main class="max-w-xl mx-auto px-6 pt-32 pb-24">
+  <span class="timecode">TRACKER</span>
+  <h1 class="display text-3xl md:text-4xl font-bold mb-2">Application Status</h1>
+  <p class="text-[--muted] mb-8">Enter your Application ID to check where things stand. No login needed — we never show personal info here.</p>
+
+  <form id="lookupForm" class="card flex gap-3">
+    <input required id="appId" class="field" placeholder="e.g. VSR-4F2A9C">
+    <button id="lookupBtn" type="submit" class="btn btn-primary shrink-0">Search</button>
+  </form>
+
+  <div id="resultCard" class="hidden card mt-6"></div>
+  <div id="errorBox" class="hidden mt-6 rounded-xl p-4 border border-red-400/40 bg-red-400/10 text-red-300 text-sm"></div>
+</main>
+
+<script src="api.js"></script>
+<script src="main.js"></script>
+<script>
+  document.getElementById('lookupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('appId').value.trim();
+    const btn = document.getElementById('lookupBtn');
+    const card = document.getElementById('resultCard');
+    const err = document.getElementById('errorBox');
+    card.classList.add('hidden'); err.classList.add('hidden');
+    setButtonLoading(btn, true, 'Searching...');
+    try {
+      const res = await api.get(`/status/${encodeURIComponent(id)}`);
+      card.classList.remove('hidden');
+      card.innerHTML = `
+        <p class="timecode">RESULT</p>
+        <div class="space-y-3 text-sm mt-2">
+          <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Application ID</span><span class="mono">${res.applicationId}</span></div>
+          <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Type</span><span>${res.type}</span></div>
+          <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Status</span><span class="badge ${statusBadgeClass(res.status)}">${res.status}</span></div>
+          <div class="flex justify-between border-b border-[--line] pb-3"><span class="text-[--muted]">Applied Date</span><span>${new Date(res.appliedDate).toLocaleDateString()}</span></div>
+          <div class="flex justify-between"><span class="text-[--muted]">Last Updated</span><span>${new Date(res.lastUpdated).toLocaleDateString()}</span></div>
+        </div>`;
+    } catch (e2) {
+      err.classList.remove('hidden');
+      err.textContent = e2.message || 'No application found with that ID.';
+    } finally {
+      setButtonLoading(btn, false, 'Search');
+    }
+  });
+</script>
+</body>
+</html>

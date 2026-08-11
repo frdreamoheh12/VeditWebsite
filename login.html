@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Vedit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+
+<div class="min-h-screen grid lg:grid-cols-2">
+
+  <!-- Left: brand / context panel (hidden on small screens) -->
+  <div class="hidden lg:flex relative flex-col justify-between p-14 overflow-hidden border-r border-[--line]">
+    <div class="absolute inset-0 -z-10" style="background: radial-gradient(ellipse 70% 60% at 20% 10%, rgba(124,58,237,0.35), transparent), radial-gradient(ellipse 50% 40% at 90% 90%, rgba(232,121,249,0.14), transparent), var(--deep);"></div>
+
+    <a href="index.html" class="flex items-center gap-2 w-fit"><img src="logo-icon.png" alt="Vedit" class="h-7 w-7 object-contain"><span class="display text-xl font-bold">Ved<span class="gradient-text">it</span></span></a>
+
+    <div>
+      <span class="timecode">RESTRICTED ACCESS</span>
+      <h1 class="display text-4xl font-extrabold leading-tight mb-4">Run the studio<br>from one timeline.</h1>
+      <p class="text-[--muted] max-w-sm leading-relaxed">
+        Review service requests, class applications and team applications, manage prices,
+        courses and portfolio — all from the admin dashboard.
+      </p>
+      <div class="waveform mt-10 opacity-60"></div>
+      <div class="scrubber max-w-sm"></div>
+    </div>
+
+    <div class="flex gap-8 text-xs text-[--muted-2] mono">
+      <span>ROLE-BASED ACCESS</span>
+      <span>JWT SECURED</span>
+      <span>AUDIT LOGGED</span>
+    </div>
+  </div>
+
+  <!-- Right: login form -->
+  <div class="flex items-center justify-center px-6 py-16">
+    <div class="w-full max-w-sm">
+
+      <a href="index.html" class="lg:hidden flex items-center gap-2 mb-10"><img src="logo-icon.png" alt="Vedit" class="h-7 w-7 object-contain"><span class="display text-xl font-bold">Ved<span class="gradient-text">it</span></span></a>
+
+      <span class="timecode">ADMIN</span>
+      <h1 class="display text-2xl md:text-3xl font-bold mb-1">Welcome back</h1>
+      <p class="text-sm text-[--muted] mb-8">Sign in to open the dashboard.</p>
+
+      <form id="loginForm" class="card space-y-5">
+        <div>
+          <label class="flabel" for="email">Email</label>
+          <input required type="email" id="email" name="email" autocomplete="username" class="field" placeholder="admin@vedit.studio">
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <label class="flabel mb-0" for="password">Password</label>
+            <button type="button" id="togglePw" class="text-xs text-[--muted] hover:text-white transition">Show</button>
+          </div>
+          <input required type="password" id="password" name="password" autocomplete="current-password" class="field mt-2" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+        </div>
+
+        <label class="flex items-center gap-2 text-xs text-[--muted]">
+          <input type="checkbox" id="remember" class="accent-purple-500">
+          Keep me signed in on this device
+        </label>
+
+        <button id="loginBtn" type="submit" class="btn btn-primary w-full">Log In</button>
+
+        <div id="loginError" class="hidden rounded-xl p-3 border border-red-400/40 bg-red-400/10 text-red-300 text-sm"></div>
+      </form>
+
+      <p class="text-xs text-[--muted-2] mt-6 text-center">
+        Locked out? Ask a super-admin to reset your credentials in the database — self-service reset isn't available yet.
+      </p>
+      <a href="index.html" class="block text-center text-xs text-[--muted] mt-4 hover:text-white transition">&larr; Back to site</a>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="main.js"></script>
+<script>
+  // if already logged in, skip straight to dashboard
+  if (localStorage.getItem('vedit_admin_token')) window.location.href = 'dashboard.html';
+
+  const pwInput = document.getElementById('password');
+  document.getElementById('togglePw').addEventListener('click', (e) => {
+    const showing = pwInput.type === 'text';
+    pwInput.type = showing ? 'password' : 'text';
+    e.target.textContent = showing ? 'Show' : 'Hide';
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const errBox = document.getElementById('loginError');
+    errBox.classList.add('hidden');
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    setButtonLoading(btn, true, 'Logging in...');
+    try {
+      const res = await api.post('/auth/login', data);
+      const remember = document.getElementById('remember').checked;
+      const store = remember ? localStorage : sessionStorage;
+      store.setItem('vedit_admin_token', res.token);
+      store.setItem('vedit_admin_name', res.admin.name);
+      store.setItem('vedit_admin_role', res.admin.role);
+      // main.js/dashboard reads from localStorage; mirror session choice there
+      if (!remember) {
+        localStorage.setItem('vedit_admin_token', res.token);
+        localStorage.setItem('vedit_admin_name', res.admin.name);
+        localStorage.setItem('vedit_admin_role', res.admin.role);
+      }
+      window.location.href = 'dashboard.html';
+    } catch (err) {
+      errBox.classList.remove('hidden');
+      errBox.textContent = err.message || 'Login failed. Check your email and password.';
+      setButtonLoading(btn, false, 'Log In');
+    }
+  });
+</script>
+</body>
+</html>
